@@ -1,0 +1,4 @@
+.mypy*
+tmp.*
+*.tmp
+tmp
