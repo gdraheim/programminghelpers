@@ -9,7 +9,7 @@ in Unix the EX-symbols are from <sysexits.h> and SIG-symbols form <signal.h>
 """
 
 __copyright__ = "(C) 2023-2024 Guido U. Draheim, licensed under the APLv2"
-__version__ = "1.0.1327"
+__version__ = "1.0.1331"
 
 from typing import Dict, NamedTuple, Union, cast, List
 import os
