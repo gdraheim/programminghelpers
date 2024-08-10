@@ -89,7 +89,7 @@ class ExitcodeValues(NamedTuple):
     values: Dict[str, int]
     hints: Dict[str, str]
 
-def exitcode_values(combine: bool = False):
+def exitcode_values(combine: bool = False) -> ExitcodeValues:
     hint = {}
     vals = {}
     # POSIX.1 - see linux man signal(7)
