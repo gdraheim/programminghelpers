@@ -16,7 +16,6 @@ import os
 import signal
 
 def pad(width: int, value: Union[str, int]) -> str:
-    pad.padding: List[str] # type: ignore[attr-defined]
     n = max(0, width - len(str(value)))
     return cast(str, pad.padding[n]) if n < 9 else (" " * n) # type: ignore[attr-defined]
 
