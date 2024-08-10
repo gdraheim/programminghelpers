@@ -1,9 +1,10 @@
 BASEYEAR=2023
 FOR=today
-FILES = *.py
+FILES = *.py *.cfg
 PYTHON3 = python3
 PYVERSION = 3.8
 GIT = git
+TWINE = twine
 
 version:
 	@ grep -l __version__ $(FILES) | { while read f; do : \
@@ -16,7 +17,8 @@ version:
 	-e "/^ *__copyright__/s/(C) [123456789][0123456789]* /(C) $$THISYEAR /" \
 	$$f; done; }
 	@ grep ^__version__ $(FILES) | grep -v _tests.py
-	@ $(MAKE) commit
+	@ ver=`grep "version.*=" setup.cfg | sed -e "s/version *= */v/"` \
+	; echo ": ${GIT} commit -m $$ver"
 
 commit:
 	@ ver=`grep "version.*=" setup.cfg | sed -e "s/version *= */v/"` \

@@ -2,3 +2,5 @@
 tmp.*
 *.tmp
 tmp
+dist
+*.egg-info
