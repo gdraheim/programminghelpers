@@ -39,14 +39,14 @@ def errno_values() -> ErrnoValues:
             hints[name] = os.strerror(value)
     return ErrnoValues(vals, hints)
 
-
+class Padding:
+    padding = ["", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        "]
+    @staticmethod
+    def get(width: int, value: Union[str, int]) -> str:
+        n = max(0, width - len(str(value)))
+        return Padding.padding[n] if n < 9 else (" " * n)
 def pad(width: int, value: Union[str, int]) -> str:
-    n = max(0, width - len(str(value)))
-    return cast(str, pad.padding[n]) if n < 9 else (" " * n)  # type: ignore[attr-defined]
-
-pad.padding = [  # type: ignore[attr-defined]
-    "", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        "]
-
+    return Padding.get(width, value)
 
 def printall(showref: int) -> None:
     vals, hint = errno_values()
