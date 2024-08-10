@@ -9,21 +9,21 @@ TWINE = twine
 default: build
 
 doc:
-	$(PYTHON3) exitcode.py | { : \
+	$(PYTHON3) exitcode.py --showref | { : \
 	; echo "## exitcode"; echo "" \
 	; $(PYTHON3) exitcode.py --help ; echo "" \
-	; echo "| num | name | description" \
-	; echo "| --: | ---- | -----------" \
-	; while read -r num name desc; do : \
-	; echo "| $$num | $$name | $$desc" \
+	; echo "| num | name | ref | description" \
+	; echo "| --: | ---- | --- | -----------" \
+	; while read -r num name ref desc; do : \
+	; echo "| $$num | $$name | $$ref | $$desc" \
 	; done ; } > exitcode.md
-	$(PYTHON3) errnocode.py | { : \
+	$(PYTHON3) errnocode.py --showref | { : \
 	; echo "## errnocode"; echo "" \
 	; $(PYTHON3) errnocode.py --help ; echo "" \
-	; echo "| num | name | description" \
-	; echo "| --: | ---- | -----------" \
-	; while read -r num name desc; do : \
-	; echo "| $$num | $$name | $$desc" \
+	; echo "| num | name | ref | description" \
+	; echo "| --: | ---- | --- | -----------" \
+	; while read -r num name ref desc; do : \
+	; echo "| $$num | $$name | $$ref| $$desc" \
 	; done ; } > errnocode.md
 
 

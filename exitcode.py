@@ -126,18 +126,20 @@ def exitcode_values(combine: bool = False) -> ExitcodeValues:
             del vals["EXIT_SUCCESS"]
     return ExitcodeValues(vals, hint)
 
-def printall() -> None:
+def printall(showref: int) -> None:
     vals, hint = exitcode_values(True)
     maxname = max(len(name) for name in vals.keys())
     maxvalue = max(len(str(val)) for val in vals.values())
     for name in reversed(sorted(vals, key=lambda x: vals[x])):
         value = vals[name]
         plus = "+" if name in posix else ":" if name in sysexit else " "
+        if showref:
+            plus = "posix " if name in posix else "sysexit " if name in sysexit else "bash " if name in bash else "- "
         print(pad(maxvalue, value), value, name, pad(
             maxname, name), plus+(hint[name] if name in hint else "-"))
 
 
-def printposix() -> None:
+def printposix(showref: int) -> None:
     vals, hint = exitcode_values()
     maxname = max(len(name) for name in vals.keys())
     maxvalue = max(len(str(val)) for val in vals.values())
@@ -150,10 +152,12 @@ def printposix() -> None:
 if __name__ == "__main__":
     from optparse import OptionParser
     cmdline = OptionParser("%prog [-options]", epilog=__doc__)
+    cmdline.add_option("-s", "--showref", action="count", default=0,
+                       help="show the source of the definition")
     cmdline.add_option("-p", "--posix", action="count", default=0,
                        help="only show posix defined errno codes")
     opt, args = cmdline.parse_args()
     if opt.posix:
-        printposix()
+        printposix(int(opt.showref))
     else:
-        printall()
+        printall(int(opt.showref))
