@@ -11,6 +11,7 @@ default: build
 doc:
 	$(PYTHON3) exitcode.py | { : \
 	; echo "## exitcode"; echo "" \
+	; $(PYTHON3) exitcode.py --help ; echo "" \
 	; echo "| num | name | description" \
 	; echo "| --: | ---- | -----------" \
 	; while read -r num name desc; do : \
@@ -18,6 +19,7 @@ doc:
 	; done ; } > exitcode.md
 	$(PYTHON3) errnocode.py | { : \
 	; echo "## errnocode"; echo "" \
+	; $(PYTHON3) errnocode.py --help ; echo "" \
 	; echo "| num | name | description" \
 	; echo "| --: | ---- | -----------" \
 	; while read -r num name desc; do : \

@@ -1,5 +1,19 @@
 ## exitcode
 
+Usage: exitcode.py [-options]
+
+Options:
+  -h, --help   show this help message and exit
+  -p, --posix  only show posix defined errno codes
+
+A list of process exit(3) codes. Note that when a signal(7) is the reason for
+the process termination then the exit code in a shell is usually
+128+signalnumber.  Bash defines its own exitcodes slightly below that (127 and
+126),  while Unix sysexits.h defines values starting at 64 (upto EX_MAX == 78
+on Linux).
+/// in Python the symbols are available as signal.SIGQUIT and os.EX_USAGE ///
+in Unix the EX-symbols are from <sysexits.h> and SIG-symbols form <signal.h>
+
 | num | name | description
 | --: | ---- | -----------
 | 192 | EXIT_SIGRTMAX | -

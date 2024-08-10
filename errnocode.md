@@ -1,5 +1,18 @@
 ## errnocode
 
+Usage: errnocode.py [-options]
+
+Options:
+  -h, --help   show this help message and exit
+  -p, --posix  only show posix defined errno codes
+
+When called without arguments it will print a list of all errno values that
+exist in the system (in reverse order to see the lowest numbers last on
+screen). Any number or name given will print the errno value record for it
+which includes the numeric value, the symbolic name, and the strerror
+description. ... This program is handy for programmers to pick an apropriate
+errno value when developing software that returns error codes via errno(3)
+
 | num | name | description
 | --: | ---- | -----------
 | 132 | ERFKILL | Operation not possible due to RF-kill
