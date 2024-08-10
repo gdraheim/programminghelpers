@@ -9,6 +9,7 @@ TWINE = twine
 A = errnocode.py
 B = exitcode.py
 C = hex2words.py
+D = untabify.py
 
 default: build
 
@@ -107,6 +108,6 @@ AUTOPEP8_INPLACE= --in-place
 	$(GIT) --no-pager diff $(@:.pep8=)
 
 type: 
-	$(MAKE) $A.type $B.type $C.type
+	$(MAKE) $A.type $B.type $C.type $D.type
 pep8 style: 
-	$(MAKE) $A.pep8 $B.pep8 $C.pep8
+	$(MAKE) $A.pep8 $B.pep8 $C.pep8 $D.pep8
