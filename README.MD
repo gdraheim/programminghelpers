@@ -13,8 +13,8 @@ the process termination then the exit code in a shell is usually 128+signalnumbe
 Bash defines its own exitcodes slightly below that (127 and 126), 
 while Unix sysexits.h defines values starting at 64 (upto EX_MAX == 78 on Linux).
                                                                  
-in Python the symbols are available as signal.SIGQUIT and os.EX_USAGE
-in Unix the EX-symbols are from `<sysexits.h` and SIG-symbols form `<signal.h>`
+in Python the symbols are available as signal.SIGQUIT and os.EX_USAGE.
+In Unix the EX-symbols are from `<sysexits.h` and SIG-symbols form `<signal.h>`
 
 ## errnocode.py
 
