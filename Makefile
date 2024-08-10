@@ -6,6 +6,27 @@ PYVERSION = 3.8
 GIT = git
 TWINE = twine
 
+default: build
+
+doc:
+	$(PYTHON3) exitcode.py | { : \
+	; echo "## exitcode"; echo "" \
+	; echo "| num | name | description" \
+	; echo "| --: | ---- | -----------" \
+	; while read -r num name desc; do : \
+	; echo "| $$num | $$name | $$desc" \
+	; done ; } > exitcode.md
+	$(PYTHON3) errnocode.py | { : \
+	; echo "## errnocode"; echo "" \
+	; echo "| num | name | description" \
+	; echo "| --: | ---- | -----------" \
+	; while read -r num name desc; do : \
+	; echo "| $$num | $$name | $$desc" \
+	; done ; } > errnocode.md
+
+
+############# version
+
 version:
 	@ grep -l __version__ $(FILES) | { while read f; do : \
 	; THISYEAR=`date +%Y -d "$(FOR)"` ; YEARS=$$(expr $$THISYEAR - $(BASEYEAR)) \
