@@ -27,20 +27,17 @@ posix = ["E2BIG", "EACCESS", "EAGAIN", "EBADF", "EBADMSG", "EBUSY",
 
 class ErrnoValues(NamedTuple):
     values: Dict[str, int]
-    maxname: int
-    maxvalue: int
+    hints: Dict[str, str]
 
 def errno_values() -> ErrnoValues:
-    maxname = 0
-    maxvalue = 0
+    hints = {}
     vals = {}
     for name in dir(errno):
         if name.startswith("E") and "_" not in name:
             value = getattr(errno, name)
-            maxname = max(maxname, len(name))
-            maxvalue = max(maxvalue, len(str(value)))
             vals[name] = value
-    return ErrnoValues(vals, maxname, maxvalue)
+            hints[name] = os.strerror(value)
+    return ErrnoValues(vals, hints)
 
 
 def pad(width: int, value: Union[str, int]) -> str:
@@ -52,21 +49,25 @@ pad.padding = [ # type: ignore[attr-defined]
 
 
 def printall() -> None:
-    vals, maxname, maxvalue = errno_values()
+    vals, hint = errno_values()
+    maxname = max(len(name) for name in vals.keys())
+    maxvalue = max(len(str(val)) for val in vals.values())
     for name in reversed(sorted(vals, key=lambda x: vals[x])):
         value = vals[name]
         plus = "+" if name in posix else " "
         print(pad(maxvalue, value), value, name, pad(
-            maxname, name), plus+os.strerror(value))
+            maxname, name), plus+(hint[name] if name in hint else "-"))
 
 
 def printposix() -> None:
-    vals, maxname, maxvalue = errno_values()
+    vals, hint = errno_values()
+    maxname = max(len(name) for name in vals.keys())
+    maxvalue = max(len(str(val)) for val in vals.values())
     for name in reversed(sorted(vals, key=lambda x: vals[x])):
         value = vals[name]
         if name in posix:
             print(pad(maxvalue, value), value, name,
-                  pad(maxname, name), os.strerror(value))
+                  pad(maxname, name), (hint[name] if name in hint else "-"))
 
 
 if __name__ == "__main__":
