@@ -6,6 +6,10 @@ PYVERSION = 3.8
 GIT = git
 TWINE = twine
 
+A = errnocode.py
+B = exitcode.py
+C = hex2words.py
+
 default: build
 
 doc:
@@ -103,6 +107,6 @@ AUTOPEP8_INPLACE= --in-place
 	$(GIT) --no-pager diff $(@:.pep8=)
 
 type: 
-	$(MAKE) errno.py.type exitcode.py.type
+	$(MAKE) $A.type $B.type $C.type
 pep8 style: 
-	$(MAKE) errno.py.pep8 exitcode.py.pep8
+	$(MAKE) $A.pep8 $B.pep8 $C.pep8
