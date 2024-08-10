@@ -42,10 +42,10 @@ def errno_values() -> ErrnoValues:
 
 def pad(width: int, value: Union[str, int]) -> str:
     n = max(0, width - len(str(value)))
-    return cast(str, pad.padding[n]) if n < 9 else (" " * n) # type: ignore[attr-defined]
+    return cast(str, pad.padding[n]) if n < 9 else (" " * n)  # type: ignore[attr-defined]
 
-pad.padding = [ # type: ignore[attr-defined]
-    "", " ", "  ", "   ", "    ",  "     ", "      ", "       ", "        "] 
+pad.padding = [  # type: ignore[attr-defined]
+    "", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        "]
 
 
 def printall(showref: int) -> None:
@@ -58,7 +58,7 @@ def printall(showref: int) -> None:
         if showref:
             plus = "posix " if name in posix else "- "
         print(pad(maxvalue, value), value, name, pad(
-            maxname, name), plus+(hint[name] if name in hint else "-"))
+            maxname, name), plus + (hint[name] if name in hint else "-"))
 
 
 def printposix(showref: int) -> None:

@@ -17,10 +17,10 @@ import signal
 
 def pad(width: int, value: Union[str, int]) -> str:
     n = max(0, width - len(str(value)))
-    return cast(str, pad.padding[n]) if n < 9 else (" " * n) # type: ignore[attr-defined]
+    return cast(str, pad.padding[n]) if n < 9 else (" " * n)  # type: ignore[attr-defined]
 
-pad.padding = [ # type: ignore[attr-defined]
-    "", " ", "  ", "   ", "    ",  "     ", "      ", "       ", "        "] 
+pad.padding = [  # type: ignore[attr-defined]
+    "", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        "]
 
 
 # bash error codes
@@ -84,7 +84,6 @@ sysexit["EX_CONFIG"] = "configuration error"
 sysexit["EX_MAX"] = "maximum listed value"
 
 
-
 class ExitcodeValues(NamedTuple):
     values: Dict[str, int]
     hints: Dict[str, str]
@@ -108,12 +107,12 @@ def exitcode_values(combine: bool = False) -> ExitcodeValues:
     # bash defined
     vals["EXIT_SUCCESS"] = 0
     vals["EXIT_FAILURE"] = 1
-    vals["EXIT_MISUSE"] = 2  
-    vals["EXIT_NOEXEC"] = 126  
-    vals["EXIT_NOTFOUND"] = 127  
+    vals["EXIT_MISUSE"] = 2
+    vals["EXIT_NOEXEC"] = 126
+    vals["EXIT_NOTFOUND"] = 127
     for name in dir(signal):
         if name.startswith("SIG") and not name.startswith("SIG_"):
-            vals["EXIT_"+name] = 128 + getattr(signal, name)
+            vals["EXIT_" + name] = 128 + getattr(signal, name)
 
     for name in dir(os):
         if name.startswith("EX_"):
@@ -136,7 +135,7 @@ def printall(showref: int) -> None:
         if showref:
             plus = "posix " if name in posix else "sysexit " if name in sysexit else "bash " if name in bash else "- "
         print(pad(maxvalue, value), value, name, pad(
-            maxname, name), plus+(hint[name] if name in hint else "-"))
+            maxname, name), plus + (hint[name] if name in hint else "-"))
 
 
 def printposix(showref: int) -> None:
