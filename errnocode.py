@@ -8,7 +8,7 @@ program is handy for programmers to pick an apropriate errno value
 when developing software that returns error codes via errno(3)"""
 
 __copyright__ = "(C) 2023-2024 Guido U. Draheim, licensed under the APLv2"
-__version__ = "1.0.1325"
+__version__ = "1.0.1326"
 
 from typing import NamedTuple, Dict, Union, cast, List
 import errno  # type: ignore
